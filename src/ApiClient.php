@@ -132,15 +132,20 @@ class ApiClient
             echo "Response: " . $this->client->response;
         }
 
-        //$responseAsArray = json_decode($this->client->response, true);
         return $this->client->response;
     }
 
+    /**
+     * @return Curl
+     */
     public function getClient(): Curl
     {
         return $this->client;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSecretToken(): ?string
     {
         return $this->secretToken;

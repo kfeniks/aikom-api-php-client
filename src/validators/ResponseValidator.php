@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\validators;
 
-use Aikom\valueObjects\ErrorResponse;
+use Aikom\context\BasicResponseScenario;
 
 /**
  * Class ResponseValidator
@@ -14,12 +14,26 @@ use Aikom\valueObjects\ErrorResponse;
 class ResponseValidator
 {
     /**
+     * @var BasicResponseScenario
+     */
+    private BasicResponseScenario $scenario;
+
+    /**
+     * ResponseValidator constructor.
+     * @param BasicResponseScenario $scenario
+     */
+    public function __construct(BasicResponseScenario $scenario)
+    {
+        $this->scenario = $scenario;
+    }
+
+    /**
      * @param array $response
      * @return bool
      */
-    public function validateError(array $response): bool
+    public function validate(array $response): bool
     {
-        foreach (ErrorResponse::fields() as $field) {
+        foreach ($this->scenario->getFields() as $field) {
             if (!isset($response[$field])) {
                 return false;
             }

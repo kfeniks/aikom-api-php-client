@@ -13,5 +13,15 @@ use Aikom\context\scenario\BasicRequestScenario;
  **/
 class ProfessionListEndpoint extends BasicRequestScenario
 {
-
+    /**
+     * Constructor ProfessionListEndpoint
+     */
+    public function __construct()
+    {
+        parent::__construct(
+            'personnel/profession-list',
+            'GET',
+            []
+        );
+    }
 }
