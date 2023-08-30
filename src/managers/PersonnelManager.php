@@ -7,8 +7,10 @@ use Aikom\ApiClient;
 use Aikom\builders\ProfessionBuilder;
 use Aikom\collectors\BasicCollector;
 use Aikom\collectors\ProfessionCollector;
+use Aikom\context\scenario\personnel\ProfessionCreateEndpoint;
 use Aikom\context\scenario\response\ErrorResponseScenario;
 use Aikom\context\scenario\response\ProfessionResponseScenario;
+use Aikom\handlers\ErrorResponseHandler;
 use Aikom\validators\ResponseValidator;
 use Aikom\valueObjects\ErrorResponse;
 use Aikom\context\scenario\personnel\ProfessionListEndpoint;
@@ -22,6 +24,36 @@ use Aikom\context\scenario\personnel\ProfessionListEndpoint;
 class PersonnelManager extends BasicManager
 {
     /**
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $personal_birth
+     * @return array
+     * @throws \Exception
+     */
+    public function create(
+        string $firstname,
+        string $lastname,
+        string $personal_birth
+    ): array
+    {
+        $response = $this->getClient()->send(
+            new ProfessionCreateEndpoint([
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'personal_birth' => $personal_birth,
+            ])
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return $responseAsArray;
+    }
+
+    /**
      * @return BasicCollector
      * @throws \Exception
      */
@@ -34,17 +66,8 @@ class PersonnelManager extends BasicManager
         $responseAsArray = json_decode($response, true);
 
         $validator = new ResponseValidator(new ErrorResponseScenario());
-        if ($validator->validate($responseAsArray)) {
-            $errorEntity = new ErrorResponse(
-                $responseAsArray['name'],
-                $responseAsArray['message'],
-                $responseAsArray['code'],
-                $responseAsArray['status'],
-                $responseAsArray['type']
-            );
-
-            throw new \Exception($errorEntity->getMessage());
-        }
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
 
         if (!isset($responseAsArray['data'])) {
             throw new \Exception('Invalid response');
