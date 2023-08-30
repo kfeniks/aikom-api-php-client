@@ -1,5 +1,33 @@
 {
+  "name": "aikom/api-client",
+  "minimum-stability": "dev",
+  "description": "This is a php library for working with API Aikom.",
+  "keywords": [
+    "api",
+    "php",
+    "aikom",
+    "client",
+    "curl"
+  ],
+  "license": "MIT",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Alex Dubinin",
+      "email": "keccgroup@gmail.com"
+    }
+  ],
   "require": {
+    "php": "^7.3",
     "curl/curl": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {"Aikom\\": "src/"}
+  },
+  "prefer-stable": true,
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
   }
 }
