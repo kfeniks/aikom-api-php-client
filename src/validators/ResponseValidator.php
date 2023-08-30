@@ -28,6 +28,15 @@ class ResponseValidator
     }
 
     /**
+     * @param BasicResponseScenario $scenario
+     * @return void
+     */
+    public function setScenario(BasicResponseScenario $scenario): void
+    {
+        $this->scenario = $scenario;
+    }
+
+    /**
      * @param array $response
      * @return bool
      */

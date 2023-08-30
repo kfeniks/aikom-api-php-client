@@ -4,21 +4,21 @@ declare(strict_types=1);
 namespace Aikom\context\scenario\response;
 
 use Aikom\context\BasicResponseScenario;
-use Aikom\valueObjects\ErrorResponse;
+use Aikom\valueObjects\Profession;
 
 /**
- * Class ErrorResponseScenario
+ * Class ProfessionResponseScenario
  * @version 1.0.0
  * @access public
  * @package Aikom\context\scenario\response
  **/
-class ErrorResponseScenario extends BasicResponseScenario
+class ProfessionResponseScenario extends BasicResponseScenario
 {
     /**
-     * Constructor ErrorResponseScenario
+     * Constructor ProfessionResponseScenario
      */
     public function __construct()
     {
-        parent::__construct('error', ErrorResponse::fields());
+        parent::__construct('profession', Profession::fields());
     }
 }

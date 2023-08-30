@@ -9,7 +9,7 @@ namespace Aikom\context;
  * @access public
  * @package Aikom\context
  **/
-class BasicResponseScenario
+abstract class BasicResponseScenario
 {
     /**
      * @var string
