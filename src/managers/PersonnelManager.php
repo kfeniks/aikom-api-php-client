@@ -3,17 +3,18 @@ declare(strict_types=1);
 
 namespace Aikom\managers;
 
-use Aikom\ApiClient;
 use Aikom\builders\ProfessionBuilder;
 use Aikom\collectors\BasicCollector;
 use Aikom\collectors\ProfessionCollector;
-use Aikom\context\scenario\personnel\ProfessionCreateEndpoint;
+use Aikom\context\scenario\personnel\PersonnelCreateEndpoint;
+use Aikom\context\scenario\personnel\PersonnelViewEndpoint;
+use Aikom\context\scenario\personnel\ProfessionViewEndpoint;
 use Aikom\context\scenario\response\ErrorResponseScenario;
 use Aikom\context\scenario\response\ProfessionResponseScenario;
 use Aikom\handlers\ErrorResponseHandler;
 use Aikom\validators\ResponseValidator;
-use Aikom\valueObjects\ErrorResponse;
 use Aikom\context\scenario\personnel\ProfessionListEndpoint;
+use Aikom\valueObjects\Personal;
 
 /**
  * Class PersonnelManager
@@ -37,7 +38,7 @@ class PersonnelManager extends BasicManager
     ): array
     {
         $response = $this->getClient()->send(
-            new ProfessionCreateEndpoint([
+            new PersonnelCreateEndpoint([
                 'firstname' => $firstname,
                 'lastname' => $lastname,
                 'personal_birth' => $personal_birth,
@@ -51,6 +52,39 @@ class PersonnelManager extends BasicManager
         $errorHandler->handle($responseAsArray);
 
         return $responseAsArray;
+    }
+
+    /**
+     * @param int $id
+     * @return Personal|null
+     * @throws \Exception
+     */
+    public function view(int $id): ?Personal
+    {
+        $response = $this->getClient()->send(
+            new PersonnelViewEndpoint($id)
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return new Personal($responseAsArray);
+    }
+
+    /**
+     * @param int $id
+     * @return string|null
+     */
+    public function profession(int $id): ?string
+    {
+        $response = $this->getClient()->send(
+            new ProfessionViewEndpoint($id)
+        );
+
+        return $response;
     }
 
     /**

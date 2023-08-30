@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Aikom\context\scenario\personnel;
 
 use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\enums\RequestMethodsEnum;
 
 /**
  * how to use:
@@ -12,21 +13,21 @@ use Aikom\context\scenario\BasicRequestScenario;
  * 'lastname' => 'string',
  * 'personal_birth' => 'string',
  * ])
- * Class ProfessionCreateEndpoint
+ * Class PersonnelCreateEndpoint
  * @version 1.0.0
  * @access public
  * @package Aikom\context\scenario\personnel
  **/
-class ProfessionCreateEndpoint extends BasicRequestScenario
+class PersonnelCreateEndpoint extends BasicRequestScenario
 {
     /**
-     * Constructor ProfessionCreateEndpoint
+     * Constructor PersonnelCreateEndpoint
      */
     public function __construct(array $data)
     {
         parent::__construct(
             'personnel',
-            'POST',
+            RequestMethodsEnum::REQUEST_METHOD_POST,
             $data
         );
     }

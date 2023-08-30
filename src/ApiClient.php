@@ -98,9 +98,9 @@ class ApiClient
 
     /**
      * @param BasicRequestScenario $scenario
-     * @return string
+     * @return string|null
      */
-    public function send(BasicRequestScenario $scenario): string
+    public function send(BasicRequestScenario $scenario): ?string
     {
         $this->checkToken();
 

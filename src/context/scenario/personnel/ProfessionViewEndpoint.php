@@ -7,20 +7,20 @@ use Aikom\context\scenario\BasicRequestScenario;
 use Aikom\context\enums\RequestMethodsEnum;
 
 /**
- * Class ProfessionListEndpoint
+ * Class ProfessionViewEndpoint
  * @version 1.0.0
  * @access public
  * @package Aikom\context\scenario\personnel
  **/
-class ProfessionListEndpoint extends BasicRequestScenario
+class ProfessionViewEndpoint extends BasicRequestScenario
 {
     /**
-     * Constructor ProfessionListEndpoint
+     * Constructor ProfessionViewEndpoint
      */
-    public function __construct()
+    public function __construct(int $id)
     {
         parent::__construct(
-            'personnel/profession-list',
+            'personnel/profession/?id=' . $id,
             RequestMethodsEnum::REQUEST_METHOD_GET,
             []
         );
