@@ -14,15 +14,32 @@ abstract class BasicRequestScenario
     /**
      * @var string
      */
-    private string $endpoint = '';
+    private string $endpoint;
     /**
      * @var string
      */
-    private string $method = 'GET';
+    private string $method;
     /**
      * @var array
      */
-    private array $data = [];
+    private array $data;
+
+    /**
+     * Constructor BasicRequestScenario
+     * @param string $endpoint
+     * @param string $method
+     * @param array $data
+     */
+    public function __construct(
+        string $endpoint,
+        string $method,
+        array $data
+    )
+    {
+        $this->endpoint = $endpoint;
+        $this->method = $method;
+        $this->data = $data;
+    }
 
     /**
      * @return string
