@@ -21,9 +21,9 @@ abstract class BasicManager
     /**
      * Constructor BasicManager
      */
-    public function __construct()
+    public function __construct(ApiClient $client)
     {
-        $this->client = new ApiClient();
+        $this->client = $client;
     }
 
     /**

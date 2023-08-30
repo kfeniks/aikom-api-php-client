@@ -23,17 +23,28 @@ class ApiClient
      * @var Curl
      */
     private Curl $client;
+    /**
+     * @var string
+     */
+    private string $login;
+    /**
+     * @var string
+     */
+    private string $password;
 
     /**
      * Constructor ApiClient
      */
-    public function __construct()
+    public function __construct(string $login, string $password)
     {
         $this->client = new Curl();
 
         $this->client->setHeader('Content-Type', 'application/json');
         $this->client->setCookie('NODE_ID', getenv("NODE_ID"));
         $this->client->setCookie('_csrf', getenv("CSRF_TOKEN"));
+
+        $this->login = $login;
+        $this->password = $password;
 
         $this->checkToken();
     }
@@ -92,7 +103,7 @@ class ApiClient
     public function checkToken(): void
     {
         if (!$this->secretToken) {
-            $this->login(getenv("TEST_API_CLIENT"), getenv("TEST_API_PASSWORD"));
+            $this->login($this->login, $this->password);
         }
     }
 
