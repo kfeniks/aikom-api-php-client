@@ -7,4 +7,6 @@ use Aikom\ApiClient;
 
 $client = new ApiClient();
 
+$client->get();
+
 getenv("HOME");

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Aikom;
 
+use Aikom\context\scenario\BasicRequestScenario;
 use Curl\Curl;
+use http\Client\Response;
 
 /**
  * Class ApiClient
@@ -33,9 +35,7 @@ class ApiClient
         $this->client->setCookie('NODE_ID', getenv("NODE_ID"));
         $this->client->setCookie('_csrf', getenv("CSRF_TOKEN"));
 
-        if (!$this->secretToken) {
-            $this->login(getenv("TEST_API_CLIENT"), getenv("TEST_API_PASSWORD"));
-        }
+        $this->checkToken();
     }
 
     /**
@@ -89,9 +89,51 @@ class ApiClient
     /**
      * @return void
      */
-    public function close(): void
+    public function checkToken(): void
     {
-        $this->client->close();
+        if (!$this->secretToken) {
+            $this->login(getenv("TEST_API_CLIENT"), getenv("TEST_API_PASSWORD"));
+        }
+    }
+
+    /**
+     * @param BasicRequestScenario $scenario
+     * @return string
+     */
+    public function send(BasicRequestScenario $scenario): string
+    {
+        $this->checkToken();
+
+        $url = getenv("GLOBAL_API_URL") . $scenario->getEndpoint();
+
+        $this->client->setHeader('Authorization', 'Bearer ' . $this->secretToken);
+
+        switch ($scenario->getMethod()) {
+            case 'GET':
+                if (!empty($scenario->getData())) {
+                    $url .= '?' . http_build_query($scenario->getData()); // Append query parameters to the URL
+                }
+                $this->client->get($url);
+                break;
+            case 'POST':
+                $this->client->post($url, json_encode($scenario->getData()));
+                break;
+            case 'PUT':
+                $this->client->put($url, json_encode($scenario->getData()));
+                break;
+            case 'DELETE':
+                $this->client->delete($url);
+                break;
+        }
+
+        if ($this->client->error) {
+            echo "cURL Error: " . $this->client->error_message;
+        } else {
+            echo "Response: " . $this->client->response;
+        }
+
+        //$responseAsArray = json_decode($this->client->response, true);
+        return $this->client->response;
     }
 
     public function getClient(): Curl
