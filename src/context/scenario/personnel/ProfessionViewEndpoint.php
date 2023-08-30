@@ -20,7 +20,7 @@ class ProfessionViewEndpoint extends BasicRequestScenario
     public function __construct(int $id)
     {
         parent::__construct(
-            'personnel/profession/?id=' . $id,
+            'personnel/profession/' . $id,
             RequestMethodsEnum::REQUEST_METHOD_GET,
             []
         );

@@ -3,26 +3,26 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\personnel;
 
-use Aikom\context\scenario\BasicRequestScenario;
 use Aikom\context\enums\RequestMethodsEnum;
+use Aikom\context\scenario\BasicRequestScenario;
 
 /**
- * Class PersonnelViewEndpoint
+ * Class PersonnelUpdateEndpoint
  * @version 1.0.0
  * @access public
  * @package Aikom\context\scenario\personnel
  **/
-class PersonnelViewEndpoint extends BasicRequestScenario
+class PersonnelUpdateEndpoint extends BasicRequestScenario
 {
     /**
-     * Constructor PersonnelViewEndpoint
+     * Constructor PersonnelUpdateEndpoint
      */
-    public function __construct(int $id)
+    public function __construct(int $id, array $data)
     {
         parent::__construct(
             'personnel/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
+            RequestMethodsEnum::REQUEST_METHOD_PUT,
+            $data
         );
     }
 }

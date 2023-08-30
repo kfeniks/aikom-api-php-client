@@ -15,12 +15,12 @@ use Aikom\context\enums\RequestMethodsEnum;
 class PersonnelDeleteEndpoint extends BasicRequestScenario
 {
     /**
-     * Constructor ProfessionViewEndpoint
+     * Constructor PersonnelDeleteEndpoint
      */
     public function __construct(int $id)
     {
         parent::__construct(
-            'personnel/?id=' . $id,
+            'personnel/' . $id,
             RequestMethodsEnum::REQUEST_METHOD_DELETE,
             []
         );

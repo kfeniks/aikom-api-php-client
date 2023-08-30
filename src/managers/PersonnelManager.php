@@ -6,7 +6,10 @@ namespace Aikom\managers;
 use Aikom\builders\ProfessionBuilder;
 use Aikom\collectors\BasicCollector;
 use Aikom\collectors\ProfessionCollector;
+use Aikom\context\scenario\personnel\PersonnelCreateAllEndpoint;
 use Aikom\context\scenario\personnel\PersonnelCreateEndpoint;
+use Aikom\context\scenario\personnel\PersonnelDeleteEndpoint;
+use Aikom\context\scenario\personnel\PersonnelUpdateEndpoint;
 use Aikom\context\scenario\personnel\PersonnelViewEndpoint;
 use Aikom\context\scenario\personnel\ProfessionViewEndpoint;
 use Aikom\context\scenario\response\ErrorResponseScenario;
@@ -43,6 +46,67 @@ class PersonnelManager extends BasicManager
                 'lastname' => $lastname,
                 'personal_birth' => $personal_birth,
             ])
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return $responseAsArray;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     * @throws \Exception
+     */
+    public function createAll(array $data): array
+    {
+        $response = $this->getClient()->send(
+            new PersonnelCreateAllEndpoint($data)
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return $responseAsArray;
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return array
+     * @throws \Exception
+     */
+    public function update(int $id, array $data): array
+    {
+        $response = $this->getClient()->send(
+            new PersonnelUpdateEndpoint($id, $data)
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return $responseAsArray;
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
+    public function delete(int $id): array
+    {
+        $response = $this->getClient()->send(
+            new PersonnelDeleteEndpoint($id)
         );
 
         $responseAsArray = json_decode($response, true);
