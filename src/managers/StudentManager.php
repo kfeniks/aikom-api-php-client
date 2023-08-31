@@ -22,13 +22,14 @@ use Aikom\validators\ResponseValidator;
 class StudentManager extends BasicManager
 {
     /**
+     * @param int $classId
      * @return array
      * @throws \Exception
      */
-    public function list(): array
+    public function list(int $classId): array
     {
         $response = $this->getClient()->send(
-            new StudentListEndpoint()
+            new StudentListEndpoint($classId)
         );
 
         $responseAsArray = json_decode($response, true);
