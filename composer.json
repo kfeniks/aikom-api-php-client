@@ -1,6 +1,6 @@
 {
   "name": "aikom/api-client",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "description": "This is a php library for working with API Aikom.",
   "keywords": [
     "api",
