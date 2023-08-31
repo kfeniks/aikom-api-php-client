@@ -5,7 +5,6 @@ namespace Aikom;
 
 use Aikom\context\scenario\BasicRequestScenario;
 use Curl\Curl;
-use http\Client\Response;
 
 /**
  * Class ApiClient
@@ -56,7 +55,8 @@ class ApiClient
      */
     public function login(string $username, string $password): void
     {
-        $url = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'] . 'user/login';
+        $baseUrl = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'];
+        $url = $baseUrl . 'user/login';
         $data = [
             "username" => $username,
             "password" => $password,
@@ -115,7 +115,8 @@ class ApiClient
     {
         $this->checkToken();
 
-        $url = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'] . $scenario->getEndpoint();
+        $baseUrl = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'];
+        $url = $baseUrl . $scenario->getEndpoint();
 
         $this->client->setHeader('Authorization', 'Bearer ' . $this->secretToken);
 
