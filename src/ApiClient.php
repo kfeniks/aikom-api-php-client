@@ -30,13 +30,22 @@ class ApiClient
      * @var string
      */
     private string $password;
+    /**
+     * @var bool
+     */
+    private bool $printCurlResponse;
+
 
     /**
      * Constructor ApiClient
+     * @param string $login
+     * @param string $password
+     * @param bool $printCurlResponse
      */
-    public function __construct(string $login, string $password)
+    public function __construct(string $login, string $password, bool $printCurlResponse = false)
     {
         $this->client = new Curl();
+        $this->printCurlResponse = $printCurlResponse;
 
         $this->client->setHeader('Content-Type', 'application/json');
         $this->client->setCookie('NODE_ID', getenv("NODE_ID") ?? $_ENV['NODE_ID']);
@@ -64,7 +73,7 @@ class ApiClient
 
         $this->client->post($url, json_encode($data));
 
-        if ($this->client->error) {
+        if ($this->printCurlResponse && $this->client->error) {
             echo "cURL Error: " . $this->client->error_message;
         } else {
             echo "Response: " . $this->client->response;
@@ -138,7 +147,7 @@ class ApiClient
                 break;
         }
 
-        if ($this->client->error) {
+        if ($this->printCurlResponse && $this->client->error) {
             echo "cURL Error: " . $this->client->error_message;
         } else {
             echo "Response: " . $this->client->response;
