@@ -40,8 +40,8 @@ class ApiClient
         $this->client = new Curl();
 
         $this->client->setHeader('Content-Type', 'application/json');
-        $this->client->setCookie('NODE_ID', getenv("NODE_ID"));
-        $this->client->setCookie('_csrf', getenv("CSRF_TOKEN"));
+        $this->client->setCookie('NODE_ID', getenv("NODE_ID") ?? $_ENV['NODE_ID']);
+        $this->client->setCookie('_csrf', getenv("CSRF_TOKEN") ?? $_ENV['CSRF_TOKEN']);
 
         $this->login = $login;
         $this->password = $password;
@@ -56,7 +56,7 @@ class ApiClient
      */
     public function login(string $username, string $password): void
     {
-        $url = getenv("GLOBAL_API_URL") . 'user/login';
+        $url = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'] . 'user/login';
         $data = [
             "username" => $username,
             "password" => $password,
@@ -115,7 +115,7 @@ class ApiClient
     {
         $this->checkToken();
 
-        $url = getenv("GLOBAL_API_URL") . $scenario->getEndpoint();
+        $url = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'] . $scenario->getEndpoint();
 
         $this->client->setHeader('Authorization', 'Bearer ' . $this->secretToken);
 
