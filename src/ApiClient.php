@@ -48,8 +48,8 @@ class ApiClient
         $this->printCurlResponse = $printCurlResponse;
 
         $this->client->setHeader('Content-Type', 'application/json');
-        $this->client->setCookie('NODE_ID', getenv("NODE_ID") ?? $_ENV['NODE_ID']);
-        $this->client->setCookie('_csrf', getenv("CSRF_TOKEN") ?? $_ENV['CSRF_TOKEN']);
+        $this->client->setCookie('NODE_ID', getenv("AIKOM_NODE_ID") ?? $_ENV['AIKOM_NODE_ID']);
+        $this->client->setCookie('_csrf', getenv("AIKOM_CSRF_TOKEN") ?? $_ENV['AIKOM_CSRF_TOKEN']);
 
         $this->login = $login;
         $this->password = $password;
@@ -64,7 +64,7 @@ class ApiClient
      */
     public function login(string $username, string $password): void
     {
-        $baseUrl = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'];
+        $baseUrl = getenv("AIKOM_API_V1_URL") ?? $_ENV['AIKOM_API_V1_URL'];
         $url = $baseUrl . 'user/login';
         $data = [
             "username" => $username,
@@ -124,7 +124,7 @@ class ApiClient
     {
         $this->checkToken();
 
-        $baseUrl = getenv("GLOBAL_API_URL") ?? $_ENV['GLOBAL_API_URL'];
+        $baseUrl = getenv("AIKOM_API_V1_URL") ?? $_ENV['AIKOM_API_V1_URL'];
         $url = $baseUrl . $scenario->getEndpoint();
 
         $this->client->setHeader('Authorization', 'Bearer ' . $this->secretToken);
