@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\journal;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class JournalIndexEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\journal
  **/
-class JournalIndexEndpoint extends BasicRequestScenario
+class JournalIndexEndpoint extends GetRequestScenario
 {
     /**
      * Constructor JournalIndexEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'journal',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('journal');
     }
 }

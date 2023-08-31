@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\subject;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class SubjectIndexEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\subject
  **/
-class SubjectIndexEndpoint extends BasicRequestScenario
+class SubjectIndexEndpoint extends GetRequestScenario
 {
     /**
      * Constructor SubjectIndexEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'subject',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('subject');
     }
 }

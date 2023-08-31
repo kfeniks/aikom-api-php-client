@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\semester;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\DeleteRequestScenario;
 
 /**
  * Class SemesterDeleteEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\semester
  **/
-class SemesterDeleteEndpoint extends BasicRequestScenario
+class SemesterDeleteEndpoint extends DeleteRequestScenario
 {
     /**
      * Constructor SemesterDeleteEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'semester/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_DELETE,
-            []
-        );
+        parent::__construct('semester/' . $id);
     }
 }

@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\lesson;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class LessonViewEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\lesson
  **/
-class LessonViewEndpoint extends BasicRequestScenario
+class LessonViewEndpoint extends GetRequestScenario
 {
     /**
      * Constructor LessonViewEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'lesson/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('lesson/' . $id);
     }
 }

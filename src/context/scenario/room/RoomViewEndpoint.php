@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\room;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class RoomViewEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\room
  **/
-class RoomViewEndpoint extends BasicRequestScenario
+class RoomViewEndpoint extends GetRequestScenario
 {
     /**
      * Constructor RoomViewEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'room/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('room/' . $id);
     }
 }

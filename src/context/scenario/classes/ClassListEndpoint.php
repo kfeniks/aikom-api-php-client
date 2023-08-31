@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\classes;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class ClassListEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\classes
  **/
-class ClassListEndpoint extends BasicRequestScenario
+class ClassListEndpoint extends GetRequestScenario
 {
     /**
      * Constructor ClassListEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'class/class-list',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('class/class-list');
     }
 }

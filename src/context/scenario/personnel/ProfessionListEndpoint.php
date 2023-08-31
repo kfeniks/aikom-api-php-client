@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\personnel;
 
-use Aikom\context\scenario\BasicRequestScenario;
-use Aikom\context\enums\RequestMethodsEnum;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class ProfessionListEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\enums\RequestMethodsEnum;
  * @access public
  * @package Aikom\context\scenario\personnel
  **/
-class ProfessionListEndpoint extends BasicRequestScenario
+class ProfessionListEndpoint extends GetRequestScenario
 {
     /**
      * Constructor ProfessionListEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'personnel/profession-list',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('personnel/profession-list');
     }
 }

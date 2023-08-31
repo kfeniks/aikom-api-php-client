@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\semester;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class SemesterIndexEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\semester
  **/
-class SemesterIndexEndpoint extends BasicRequestScenario
+class SemesterIndexEndpoint extends GetRequestScenario
 {
     /**
      * Constructor SemesterIndexEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'semester',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('semester');
     }
 }

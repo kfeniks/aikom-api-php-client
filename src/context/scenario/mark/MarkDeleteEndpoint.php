@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\mark;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\DeleteRequestScenario;
 
 /**
  * Class MarkDeleteEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\mark
  **/
-class MarkDeleteEndpoint extends BasicRequestScenario
+class MarkDeleteEndpoint extends DeleteRequestScenario
 {
     /**
      * Constructor MarkDeleteEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'mark/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_DELETE,
-            []
-        );
+        parent::__construct('mark/' . $id);
     }
 }

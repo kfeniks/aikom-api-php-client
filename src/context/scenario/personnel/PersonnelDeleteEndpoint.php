@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\personnel;
 
-use Aikom\context\scenario\BasicRequestScenario;
-use Aikom\context\enums\RequestMethodsEnum;
+use Aikom\context\scenario\DeleteRequestScenario;
 
 /**
  * Class PersonnelDeleteEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\enums\RequestMethodsEnum;
  * @access public
  * @package Aikom\context\scenario\personnel
  **/
-class PersonnelDeleteEndpoint extends BasicRequestScenario
+class PersonnelDeleteEndpoint extends DeleteRequestScenario
 {
     /**
      * Constructor PersonnelDeleteEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'personnel/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_DELETE,
-            []
-        );
+        parent::__construct('personnel/' . $id);
     }
 }

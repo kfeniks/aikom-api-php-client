@@ -3,42 +3,23 @@ declare(strict_types=1);
 
 namespace Aikom\managers;
 
+use Aikom\context\scenario\calls\CallsCreateEndpoint;
+use Aikom\context\scenario\calls\CallsDeleteEndpoint;
+use Aikom\context\scenario\calls\CallsListEndpoint;
+use Aikom\context\scenario\calls\CallsUpdateEndpoint;
+use Aikom\context\scenario\calls\CallsViewEndpoint;
 use Aikom\context\scenario\response\ErrorResponseScenario;
-use Aikom\context\scenario\room\RoomCreateEndpoint;
-use Aikom\context\scenario\room\RoomIndexEndpoint;
-use Aikom\context\scenario\room\RoomListEndpoint;
-use Aikom\context\scenario\room\RoomUpdateEndpoint;
-use Aikom\context\scenario\room\RoomViewEndpoint;
 use Aikom\handlers\ErrorResponseHandler;
 use Aikom\validators\ResponseValidator;
 
 /**
- * Class RoomManager
+ * Class CallsManager
  * @version 1.0.0
  * @access public
  * @package Aikom\managers
  **/
-class RoomManager extends BasicManager
+class CallsManager extends BasicManager
 {
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    public function index(): array
-    {
-        $response = $this->getClient()->send(
-            new RoomIndexEndpoint()
-        );
-
-        $responseAsArray = json_decode($response, true);
-
-        $validator = new ResponseValidator(new ErrorResponseScenario());
-        $errorHandler = new ErrorResponseHandler($validator);
-        $errorHandler->handle($responseAsArray);
-
-        return $responseAsArray;
-    }
-
     /**
      * @return array
      * @throws \Exception
@@ -46,7 +27,7 @@ class RoomManager extends BasicManager
     public function list(): array
     {
         $response = $this->getClient()->send(
-            new RoomListEndpoint()
+            new CallsListEndpoint()
         );
 
         $responseAsArray = json_decode($response, true);
@@ -66,7 +47,27 @@ class RoomManager extends BasicManager
     public function view(int $id): array
     {
         $response = $this->getClient()->send(
-            new RoomViewEndpoint($id)
+            new CallsViewEndpoint($id)
+        );
+
+        $responseAsArray = json_decode($response, true);
+
+        $validator = new ResponseValidator(new ErrorResponseScenario());
+        $errorHandler = new ErrorResponseHandler($validator);
+        $errorHandler->handle($responseAsArray);
+
+        return $responseAsArray;
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
+    public function delete(int $id): array
+    {
+        $response = $this->getClient()->send(
+            new CallsDeleteEndpoint($id)
         );
 
         $responseAsArray = json_decode($response, true);
@@ -87,7 +88,7 @@ class RoomManager extends BasicManager
     public function update(int $id, array $data): array
     {
         $response = $this->getClient()->send(
-            new RoomUpdateEndpoint($id, $data)
+            new CallsUpdateEndpoint($id, $data)
         );
 
         $responseAsArray = json_decode($response, true);
@@ -100,29 +101,26 @@ class RoomManager extends BasicManager
     }
 
     /**
+     * @param int $smenaId
      * @param string $name
-     * @param int $area
-     * @param string $specialization
-     * @param int $studiesStatus
-     * @param int $semesterId
+     * @param string $startTime
+     * @param string $stopTime
      * @return array
      * @throws \Exception
      */
     public function create(
+        int $smenaId,
         string $name,
-        int $area,
-        string $specialization,
-        int $studiesStatus,
-        int $semesterId
+        string $startTime,
+        string $stopTime
     ): array
     {
         $response = $this->getClient()->send(
-            new RoomCreateEndpoint([
+            new CallsCreateEndpoint([
+                'smena_id' => $smenaId,
                 'name' => $name,
-                'area' => $area,
-                'specialization' => $specialization,
-                'is_not_for_studies' => $studiesStatus,
-                'semester_id' => (string)$semesterId,
+                'time_start' => $startTime,
+                'time_stop' => $stopTime,
             ])
         );
 

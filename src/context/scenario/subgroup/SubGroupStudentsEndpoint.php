@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\subgroup;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class SubGroupStudentsEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\subgroup
  **/
-class SubGroupStudentsEndpoint extends BasicRequestScenario
+class SubGroupStudentsEndpoint extends GetRequestScenario
 {
     /**
      * Constructor SubGroupStudentsEndpoint
      */
     public function __construct(int $id)
     {
-        parent::__construct(
-            'subgroup/subgroup-students/' . $id,
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('subgroup/subgroup-students/' . $id);
     }
 }

@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Aikom\context\scenario\mark;
 
-use Aikom\context\enums\RequestMethodsEnum;
-use Aikom\context\scenario\BasicRequestScenario;
+use Aikom\context\scenario\GetRequestScenario;
 
 /**
  * Class MarkListEndpoint
@@ -12,17 +11,13 @@ use Aikom\context\scenario\BasicRequestScenario;
  * @access public
  * @package Aikom\context\scenario\mark
  **/
-class MarkListEndpoint extends BasicRequestScenario
+class MarkListEndpoint extends GetRequestScenario
 {
     /**
      * Constructor MarkListEndpoint
      */
     public function __construct()
     {
-        parent::__construct(
-            'mark/mark-value-list',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
-            []
-        );
+        parent::__construct('mark/mark-value-list');
     }
 }
