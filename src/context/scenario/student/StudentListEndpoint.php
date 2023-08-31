@@ -15,15 +15,16 @@ use Aikom\context\scenario\BasicRequestScenario;
 class StudentListEndpoint extends BasicRequestScenario
 {
     /**
+     * warning: it's GET method in docs, but in real it's POST
      * Constructor StudentListEndpoint
      */
     public function __construct(int $classId)
     {
         parent::__construct(
             'student/list',
-            RequestMethodsEnum::REQUEST_METHOD_GET,
+            RequestMethodsEnum::REQUEST_METHOD_POST,
             [
-                'class_id' => $classId,
+                'classId' => $classId,
             ]
         );
     }
