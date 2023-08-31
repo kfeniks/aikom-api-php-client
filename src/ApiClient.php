@@ -75,7 +75,7 @@ class ApiClient
 
         if ($this->printCurlResponse && $this->client->error) {
             echo "cURL Error: " . $this->client->error_message;
-        } else {
+        } elseif($this->printCurlResponse) {
             echo "Response: " . $this->client->response;
         }
 
@@ -149,7 +149,7 @@ class ApiClient
 
         if ($this->printCurlResponse && $this->client->error) {
             echo "cURL Error: " . $this->client->error_message;
-        } else {
+        } elseif($this->printCurlResponse) {
             echo "Response: " . $this->client->response;
         }
 
