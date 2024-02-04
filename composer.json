@@ -1,6 +1,5 @@
 {
   "name": "aikom/api-client",
-  "minimum-stability": "stable",
   "description": "This is a php library for working with API Aikom.",
   "keywords": [
     "api",
@@ -10,7 +9,7 @@
     "curl"
   ],
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "authors": [
     {
       "name": "Alex Dubinin",
@@ -18,7 +17,7 @@
     }
   ],
   "require": {
-    "php": ">=7.3.0",
+    "php": ">=7.4.9",
     "curl/curl": "^2.0"
   },
   "autoload": {
