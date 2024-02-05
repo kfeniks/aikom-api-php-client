@@ -10,20 +10,25 @@
   ],
   "license": "MIT",
   "version": "1.0.2",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Alex Dubinin",
       "email": "keccgroup@gmail.com"
     }
   ],
+  "support": {
+    "email": "keccgroup@gmail.com"
+  },
   "require": {
     "php": ">=7.4.9",
     "curl/curl": "^2.0"
   },
+  "require-dev": {
+  },
   "autoload": {
     "psr-4": {"Aikom\\": "src/"}
   },
-  "prefer-stable": true,
   "homepage": "https://github.com/kfeniks",
   "scripts": {
     "post-root-package-install": [
